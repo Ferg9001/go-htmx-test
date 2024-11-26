@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO + HTMX</title>
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>GO HTMX</h1>
+    <ul id="todo-list">
+        {{range .Todos}}
+            {{block "todo-list-element" .}}
+                <li>{{.Message}}</li>
+            {{end}}
+        {{end}}
+    </ul>
+
+    <form hx-post="/add-todo" hx-target="#todo-list" hx-swap="beforeend">
+        <label for="Message">Message</label>
+        <input type="text" name="Message" id="Message" required />
+        <input type="submit" value="Enviar!" />
+    </form>
+</body>
+</html>
